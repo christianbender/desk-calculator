@@ -34,6 +34,7 @@ var Calculator = /** @class */ (function () {
             }
             else if (this.calcString == "Infinity") {
                 this.calcString = ch;
+                this.display();
             }
             else {
                 if (ch == "sign") {
