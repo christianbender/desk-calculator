@@ -38,6 +38,10 @@ class Calculator {
                         this.calcString = ch;
                         break;
                 }
+            } else if (this.calcString == "Infinity") {
+                
+                this.calcString = ch;
+
             } else {
                 if (ch == "sign") {
                     this.append("-(");

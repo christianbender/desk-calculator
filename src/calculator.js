@@ -32,6 +32,9 @@ var Calculator = /** @class */ (function () {
                         break;
                 }
             }
+            else if (this.calcString == "Infinity") {
+                this.calcString = ch;
+            }
             else {
                 if (ch == "sign") {
                     this.append("-(");
