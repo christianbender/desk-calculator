@@ -1,0 +1,19 @@
+{
+  "name": "desk-calculator.github.io",
+  "version": "1.0.0",
+  "description": "A simple desk calculator",
+  "main": "index.html",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "desk",
+    "calculator",
+    "javascript"
+  ],
+  "author": "Christian Bender",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jquery": "^1.10.34"
+  }
+}

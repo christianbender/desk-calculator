@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="src/style.css">
+    <title>Desk calculator</title>
+    <script src="src/calculator.js"></script>
+</head>
+
+<body>
+    <div class="w3-container w3-teal">
+        <div class="w3-center">
+            <h1>Simple desk calculator</h1>
+        </div>
+    </div>
+    <div class="w3-container">
+        <!-- form for the calculator -->
+        <form class="w3-container">
+            <label>Display area:</label>
+            <input type="text" id="io-display" class="w3-input" style="font-size: 30px;">
+            <!-- keyboard of the calculator -->
+            <div class="w3-row">
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-six" class="w3-btn w3-blue-grey w3-block">6</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-seven" class="w3-btn w3-blue-grey w3-block">7</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-eight" class="w3-btn w3-blue-grey w3-block">8</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-nine" class="w3-btn w3-blue-grey w3-block">9</button>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-two" class="w3-btn w3-blue-grey w3-block">2</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-three" class="w3-btn w3-blue-grey w3-block">3</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-four" class="w3-btn w3-blue-grey w3-block">4</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-five" class="w3-btn w3-blue-grey w3-block">5</button>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-zero" class="w3-btn w3-blue-grey w3-block">0</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-one" class="w3-btn w3-blue-grey w3-block">1</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-minus" class="w3-btn w3-red w3-block">-</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-plus" class="w3-btn w3-red w3-block">+</button>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-div" class="w3-btn w3-red w3-block">/</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-mul" class="w3-btn w3-red w3-block">*</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-sign" class="w3-btn w3-red w3-block">+/-</button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-calc" class="w3-btn w3-black w3-block">=</button>
+                </div>
+            </div>
+            <div class="w3-row">
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" id="button-clear" class="w3-btn w3-black w3-block">C</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
