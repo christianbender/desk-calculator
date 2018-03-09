@@ -52,6 +52,7 @@ class Calculator {
                         this.append("Math.sqrt(");
                         this.calcString += ")";
                         this.calculate();
+                        this.display();
                         break;
                     default:
                         this.calcString = ch;
@@ -87,6 +88,7 @@ class Calculator {
                     this.append("Math.sqrt(");
                     this.calcString += ")";
                     this.calculate();
+                    this.display();
                 } else {
                     this.calcString += ch;
                 }
