@@ -12,7 +12,8 @@ var Calculator = /** @class */ (function () {
     // adds a operation a a digit to the string calcString.
     Calculator.prototype.add = function (ch) {
         if ((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
-            || (ch == '/') || (ch == "sign")) {
+            || (ch == '/') || (ch == "sign") || (ch == "square") || (ch == "(") || (ch == ")")
+            || (ch == "sroot")) {
             // for avoiding leading 0
             if (this.calcString == "0") {
                 switch (ch) {
@@ -20,6 +21,7 @@ var Calculator = /** @class */ (function () {
                     case '-':
                     case '*':
                     case '/':
+                    case ')':
                         this.calcString += ch;
                         break;
                     case "sign":
@@ -27,20 +29,60 @@ var Calculator = /** @class */ (function () {
                         this.calcString += ")";
                         this.display();
                         this.calculate();
+                        break;
+                    case "square":
+                        this.append("(");
+                        this.calcString += ")";
+                        this.append(this.calcString + "*");
+                        this.calculate();
+                        this.display();
+                        break;
+                    case "(":
+                        this.append("(");
+                        this.display();
+                        break;
+                    case "sroot":
+                        this.append("Math.sqrt(");
+                        this.calcString += ")";
+                        this.calculate();
+                        break;
                     default:
                         this.calcString = ch;
                         break;
                 }
             }
             else if (this.calcString == "Infinity") {
-                this.calcString = ch;
-                this.display();
+                if (ch != "sign" && ch != "square" && ch != "(" && ch != ")"
+                    && ch != "sroot") {
+                    this.calcString = ch;
+                    this.display();
+                }
             }
             else {
                 if (ch == "sign") {
                     this.append("-(");
                     this.calcString += ")";
                     this.display();
+                    this.calculate();
+                }
+                else if (ch == "square") {
+                    this.append("(");
+                    this.calcString += ")";
+                    this.append(this.calcString + "*");
+                    this.calculate();
+                    this.display();
+                }
+                else if (ch == "(") {
+                    this.append("(");
+                    this.display();
+                }
+                else if (ch == ")") {
+                    this.calcString += ")";
+                    this.display();
+                }
+                else if (ch == "sroot") {
+                    this.append("Math.sqrt(");
+                    this.calcString += ")";
                     this.calculate();
                 }
                 else {
@@ -164,5 +206,17 @@ $("document").ready(function () {
     });
     $("#button-calc").click(function () {
         cal.calculate();
+    });
+    $("#button-square").click(function () {
+        cal.add("square");
+    });
+    $("#button-obracket").click(function () {
+        cal.add("(");
+    });
+    $("#button-cbracket").click(function () {
+        cal.add(")");
+    });
+    $("#button-sroot").click(function () {
+        cal.add("sroot");
     });
 });
