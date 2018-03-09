@@ -1,4 +1,12 @@
 button {
     margin-top: 3px;
     border: 2px solid black !important; 
+    opacity: 0.75;
+}
+
+body {
+    background-image: url("../img/image.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
