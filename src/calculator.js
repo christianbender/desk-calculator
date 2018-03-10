@@ -8,12 +8,14 @@
 var Calculator = /** @class */ (function () {
     function Calculator() {
         this.calcString = "";
+        this.waitInput = false;
+        this.waitOp = "";
     }
     // adds a operation a a digit to the string calcString.
     Calculator.prototype.add = function (ch) {
-        if ((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
+        if (((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
             || (ch == '/') || (ch == "sign") || (ch == "square") || (ch == "(") || (ch == ")")
-            || (ch == "sroot")) {
+            || (ch == "sroot") || (ch == "power")) && !this.waitInput) {
             // for avoiding leading 0
             if (this.calcString == "0") {
                 switch (ch) {
@@ -47,6 +49,12 @@ var Calculator = /** @class */ (function () {
                         this.calculate();
                         this.display();
                         break;
+                    case "power":
+                        this.waitInput = true;
+                        this.waitOp = "power";
+                        this.append("Math.pow(");
+                        this.calcString += ",";
+                        break;
                     default:
                         this.calcString = ch;
                         break;
@@ -54,7 +62,7 @@ var Calculator = /** @class */ (function () {
             }
             else if (this.calcString == "Infinity") {
                 if (ch != "sign" && ch != "square" && ch != "(" && ch != ")"
-                    && ch != "sroot") {
+                    && ch != "sroot" && ch != "power") {
                     this.calcString = ch;
                     this.display();
                 }
@@ -87,9 +95,22 @@ var Calculator = /** @class */ (function () {
                     this.calculate();
                     this.display();
                 }
+                else if (ch == "power") {
+                    this.waitInput = true;
+                    this.waitOp = "power";
+                    this.append("Math.pow(");
+                    this.calcString += ",";
+                }
                 else {
                     this.calcString += ch;
                 }
+            }
+        }
+        else if (this.waitInput) {
+            switch (this.waitOp) {
+                case "power":
+                    this.calcString += ch;
+                    break;
             }
         }
         else {
@@ -106,27 +127,35 @@ var Calculator = /** @class */ (function () {
     // evals the string calcString
     Calculator.prototype.calculate = function () {
         var ans;
-        // checks whether calcString is empty.
-        if (this.calcString == "") {
-            ans = 0;
-        }
-        else {
-            try {
-                ans = eval(this.calcString);
+        if (!this.waitInput) {
+            // checks whether calcString is empty.
+            if (this.calcString == "") {
+                ans = 0;
             }
-            catch (SyntaxError) {
-                $("#io-display").val("Syntax Error!");
+            else {
+                try {
+                    ans = eval(this.calcString);
+                }
+                catch (SyntaxError) {
+                    $("#io-display").val("Syntax Error!");
+                    this.calcString = "";
+                    return;
+                }
+            }
+            if (!isNaN(ans)) {
+                $("#io-display").val("" + ans);
+                this.calcString = "" + ans;
+            }
+            else {
+                $("#io-display").val("Calculation Error!");
                 this.calcString = "";
-                return;
             }
         }
-        if (!isNaN(ans)) {
-            $("#io-display").val("" + ans);
-            this.calcString = "" + ans;
-        }
         else {
-            $("#io-display").val("Calculation Error!");
-            this.calcString = "";
+            this.calcString += ")";
+            this.waitInput = false;
+            this.waitOp = "";
+            this.calculate();
         }
     };
     // clears the string calcString
@@ -135,7 +164,9 @@ var Calculator = /** @class */ (function () {
     };
     // displays the string calcString in the display.
     Calculator.prototype.display = function () {
-        $("#io-display").val(this.calcString);
+        if (!this.waitInput) {
+            $("#io-display").val(this.calcString);
+        }
     };
     return Calculator;
 }());
@@ -220,5 +251,8 @@ $("document").ready(function () {
     });
     $("#button-sroot").click(function () {
         cal.add("sroot");
+    });
+    $("#button-power").click(function () {
+        cal.add("power");
     });
 });

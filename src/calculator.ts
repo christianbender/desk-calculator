@@ -10,16 +10,21 @@ class Calculator {
 
     // string contains the arithmetic term that to calculate.
     private calcString: string;
+    private mem1: number;
+    private waitInput: boolean;
+    private waitOp: string;
 
     constructor() {
         this.calcString = "";
+        this.waitInput = false;
+        this.waitOp = "";
     }
 
     // adds a operation a a digit to the string calcString.
     add(ch: string): void {
-        if ((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
+        if (((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
             || (ch == '/') || (ch == "sign") || (ch == "square") || (ch == "(") || (ch == ")")
-            || (ch == "sroot")) {
+            || (ch == "sroot") || (ch == "power")) && !this.waitInput) {
 
             // for avoiding leading 0
             if (this.calcString == "0") {
@@ -54,6 +59,12 @@ class Calculator {
                         this.calculate();
                         this.display();
                         break;
+                    case "power":
+                        this.waitInput = true;
+                        this.waitOp = "power";
+                        this.append("Math.pow(");
+                        this.calcString += ",";
+                        break;
                     default:
                         this.calcString = ch;
                         break;
@@ -61,7 +72,7 @@ class Calculator {
             } else if (this.calcString == "Infinity") {
 
                 if (ch != "sign" && ch != "square" && ch != "(" && ch != ")"
-                    && ch != "sroot") {
+                    && ch != "sroot" && ch != "power") {
                     this.calcString = ch;
                     this.display();
                 }
@@ -89,11 +100,25 @@ class Calculator {
                     this.calcString += ")";
                     this.calculate();
                     this.display();
+                } else if (ch == "power") {
+                    this.waitInput = true;
+                    this.waitOp = "power";
+                    this.append("Math.pow(");
+                    this.calcString += ",";
                 } else {
                     this.calcString += ch;
                 }
 
             }
+
+        } else if (this.waitInput) {
+
+            switch (this.waitOp) {
+                case "power":
+                    this.calcString += ch;
+                    break;
+            }
+
 
         } else {
             throw new Error("unknow character!");
@@ -112,26 +137,33 @@ class Calculator {
     calculate(): void {
         var ans: number;
 
-        // checks whether calcString is empty.
-        if (this.calcString == "") {
-            ans = 0;
-        } else {
-            try {
-                ans = eval(this.calcString);
+        if (!this.waitInput) {
+            // checks whether calcString is empty.
+            if (this.calcString == "") {
+                ans = 0;
+            } else {
+                try {
+                    ans = eval(this.calcString);
+                }
+                catch (SyntaxError) {
+                    $("#io-display").val("Syntax Error!");
+                    this.calcString = "";
+                    return;
+                }
             }
-            catch (SyntaxError) {
-                $("#io-display").val("Syntax Error!");
-                this.calcString = "";
-                return;
-            }
-        }
 
-        if (!isNaN(ans)) {
-            $("#io-display").val("" + ans);
-            this.calcString = "" + ans;
+            if (!isNaN(ans)) {
+                $("#io-display").val("" + ans);
+                this.calcString = "" + ans;
+            } else {
+                $("#io-display").val("Calculation Error!");
+                this.calcString = "";
+            }
         } else {
-            $("#io-display").val("Calculation Error!");
-            this.calcString = "";
+            this.calcString += ")";
+            this.waitInput = false;
+            this.waitOp = "";
+            this.calculate();
         }
     }
 
@@ -142,7 +174,9 @@ class Calculator {
 
     // displays the string calcString in the display.
     display(): void {
-        $("#io-display").val(this.calcString);
+        if (!this.waitInput) {
+            $("#io-display").val(this.calcString);
+        }
     }
 }
 
@@ -250,5 +284,9 @@ $("document").ready(function () {
 
     $("#button-sroot").click(function () {
         cal.add("sroot");
+    });
+
+    $("#button-power").click(function () {
+        cal.add("power");
     });
 });

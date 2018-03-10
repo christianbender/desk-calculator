@@ -22,7 +22,7 @@
         <!-- form for the calculator -->
         <form class="w3-container">
             <label>Display area:</label>
-            <input type="text" id="io-display" class="w3-input" style="font-size: 30px;">
+            <input type="text" title="displays the inputs and the results" id="io-display" class="w3-input" style="font-size: 30px;">
             <!-- keyboard of the calculator -->
             <div class="w3-row">
                 <div class="w3-col m3 l3 s3">
@@ -60,24 +60,36 @@
                     <button type="button" id="button-one" class="w3-btn w3-blue-grey w3-block w3-round-large">1</button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-minus" class="w3-btn w3-red w3-block w3-round-large">-</button>
+                    <button type="button" id="button-minus" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#8722;</span>
+                    </button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-plus" class="w3-btn w3-red w3-block w3-round-large">+</button>
+                    <button type="button" id="button-plus" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#43;</span>
+                    </button>
                 </div>
             </div>
             <div class="w3-row">
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-div" class="w3-btn w3-red w3-block w3-round-large">/</button>
+                    <button type="button" id="button-div" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#247;</span>
+                    </button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-mul" class="w3-btn w3-red w3-block w3-round-large">*</button>
+                    <button type="button" id="button-mul" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#215;</span>
+                    </button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-sign" class="w3-btn w3-red w3-block w3-round-large">+/-</button>
+                    <button type="button" id="button-sign" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#177;</span>
+                    </button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-calc" class="w3-btn w3-black w3-block w3-round-large">=</button>
+                    <button type="button" id="button-calc" class="w3-btn w3-black w3-block w3-round-large">
+                        <span style="font-size:140%;">&#61;</span>
+                    </button>
                 </div>
             </div>
             <div class="w3-row">
@@ -88,15 +100,26 @@
                     <button type="button" id="button-square" class="w3-btn w3-purple w3-block w3-round-large">x&sup2</button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-obracket" class="w3-btn w3-red w3-block w3-round-large">(</button>
+                    <button type="button" id="button-obracket" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#8317;</span>
+                    </button>
                 </div>
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-cbracket" class="w3-btn w3-red w3-block w3-round-large">)</button>
+                    <button type="button" id="button-cbracket" class="w3-btn w3-red w3-block w3-round-large">
+                        <span style="font-size:140%;">&#8318;</span>
+                    </button>
                 </div>
             </div>
             <div class="w3-row">
                 <div class="w3-col m3 l3 s3">
-                    <button type="button" id="button-sroot" class="w3-btn w3-purple w3-block w3-round-large">sqrt(x)</button>
+                    <button type="button" id="button-sroot" class="w3-btn w3-purple w3-block w3-round-large">
+                        <span style="font-size:140%;">&#8730;</span>
+                    </button>
+                </div>
+                <div class="w3-col m3 l3 s3">
+                    <button type="button" title="calculates the power; after that click on = " id="button-power" class="w3-btn w3-purple w3-block w3-round-large">
+                        <span style="font-size:140%;"> x^y</span>
+                    </button>
                 </div>
             </div>
         </form>
