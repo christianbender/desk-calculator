@@ -16,6 +16,8 @@ Background image of my app:
 - [author: Gerd Altmann (geralt)](https://pixabay.com/de/users/geralt-9301/)  
 - [license: CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.de)  
 
+--- 
+
 ## Usage  
 
 The calculator is quite straightforward.  
@@ -25,6 +27,8 @@ For using the power-operation: For example 2^3:
 - Click on x^y  
 - After that click on 3.  
 - Finish with click on =  
+
+--- 
 
 ## How it looks like  
 
