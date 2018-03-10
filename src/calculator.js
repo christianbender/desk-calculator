@@ -15,7 +15,7 @@ var Calculator = /** @class */ (function () {
     Calculator.prototype.add = function (ch) {
         if (((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
             || (ch == '/') || (ch == "sign") || (ch == "square") || (ch == "(") || (ch == ")")
-            || (ch == "sroot") || (ch == "power")) && !this.waitInput) {
+            || (ch == "sroot") || (ch == "power") || (ch == ".")) && !this.waitInput) {
             // for avoiding leading 0
             if (this.calcString == "0") {
                 switch (ch) {
@@ -24,6 +24,7 @@ var Calculator = /** @class */ (function () {
                     case '*':
                     case '/':
                     case ')':
+                    case '.':
                         this.calcString += ch;
                         break;
                     case "sign":
@@ -168,6 +169,13 @@ var Calculator = /** @class */ (function () {
             $("#io-display").val(this.calcString);
         }
     };
+    // removes the last digit.
+    Calculator.prototype.shift = function () {
+        if ($.isNumeric(this.calcString[this.calcString.length - 1])) {
+            this.calcString = this.calcString.slice(0, this.calcString.length - 1);
+            this.display();
+        }
+    };
     return Calculator;
 }());
 $("document").ready(function () {
@@ -254,5 +262,12 @@ $("document").ready(function () {
     });
     $("#button-power").click(function () {
         cal.add("power");
+    });
+    $("#button-shift").click(function () {
+        cal.shift();
+    });
+    $("#button-point").click(function () {
+        cal.add(".");
+        cal.display();
     });
 });

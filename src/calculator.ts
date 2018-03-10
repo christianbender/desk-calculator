@@ -24,7 +24,7 @@ class Calculator {
     add(ch: string): void {
         if (((ch >= '0' && ch <= '9') || (ch == '+') || (ch == '-') || (ch == '*')
             || (ch == '/') || (ch == "sign") || (ch == "square") || (ch == "(") || (ch == ")")
-            || (ch == "sroot") || (ch == "power")) && !this.waitInput) {
+            || (ch == "sroot") || (ch == "power") || (ch == ".")) && !this.waitInput) {
 
             // for avoiding leading 0
             if (this.calcString == "0") {
@@ -34,6 +34,7 @@ class Calculator {
                     case '*':
                     case '/':
                     case ')':
+                    case '.':
                         this.calcString += ch;
                         break;
                     case "sign":
@@ -178,6 +179,14 @@ class Calculator {
             $("#io-display").val(this.calcString);
         }
     }
+
+    // removes the last digit.
+    shift(): void {
+        if ($.isNumeric(this.calcString[this.calcString.length - 1])) {
+            this.calcString = this.calcString.slice(0, this.calcString.length - 1);
+            this.display();
+        }
+    }
 }
 
 
@@ -288,5 +297,14 @@ $("document").ready(function () {
 
     $("#button-power").click(function () {
         cal.add("power");
+    });
+
+    $("#button-shift").click(function () {
+        cal.shift();
+    });
+
+    $("#button-point").click(function () {
+        cal.add(".");
+        cal.display();
     });
 });
